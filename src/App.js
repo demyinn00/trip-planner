@@ -16,7 +16,7 @@ import {
 } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 
-const categories = ['Car Snacks', 'Water', 'Food', 'Entertainment', 'Electronics', 'Survival', 'Other Shit'];
+const categories = ['Car Snacks', 'Drinks', 'Food', 'Entertainment', 'Electronics', 'Survival', 'Other Shit'];
 
 function App() {
   const [userName, setUserName] = useState('');
