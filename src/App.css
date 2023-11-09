@@ -63,19 +63,12 @@
   background-color: #dcdcdc;
 }
 
-.task-card-title {
-  color: #282c34; /* React blue for task titles */
-}
-
 .task-card {
   padding: 10px 15px;
   border-bottom: 1px solid #ddd;
-  color: #282c34; /* Dark color for text to be visible on light background */
-  background-color: #ffffff; /* Optional: if you want to set a specific background color for tasks */
-
-  display: flex;
-  align-items: center; /* Aligns items vertically in the center */
-  gap: 10px; /* Adds space between the checkbox and the task description */
+  color: #282c34;
+  background-color: #ffffff;
+  display: block; /* Changed from flex to block */
 }
 
 .task-card:last-child {
@@ -83,33 +76,33 @@
 }
 
 .task-card-content {
-  display: flex;
-  align-items: center;
-  flex-grow: 1; /* Allows the content to take up the remaining space */
+  display: block; /* Changed from flex to block */
 }
 
-/* Style for the checkbox specifically */
 .task-card-checkbox {
   cursor: pointer;
+  margin-right: 10px;
 }
 
-/* Optional: Style for completed tasks */
 .task-card.completed .task-card-description {
   text-decoration: line-through;
   color: #a9a9a9;
 }
 
-/* Style for the task description */
 .task-card-description {
-  flex-grow: 1; /* Ensures the description takes up the available space */
+  margin-bottom: 0.5em; /* Space below the description */
 }
 
-/* Style for the edit and delete buttons */
+.task-card-assignee {
+  font-size: 0.8em; /* Smaller font size for the assignee's name */
+  font-style: italic; /* Italicize the assignee's name */
+  color: #555; /* Subdued color for the assignee's name */
+}
+
 .task-card button {
   margin-left: 5px;
 }
 
-/* Style for the form when editing a task */
 .task-card form {
   display: flex;
   gap: 5px;
@@ -124,4 +117,3 @@
 .task-card form button {
   padding: 5px 10px;
 }
-
