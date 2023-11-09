@@ -16,7 +16,7 @@ import {
 } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 
-const categories = ['Car Snacks', 'Drinks', 'Food', 'Entertainment', 'Electronics', 'Survival', 'Other Shit'];
+const categories = ['Car Snacks', 'Drinks', 'Food', 'Entertainment', 'Electronics', 'Survival', 'Other'];
 
 function App() {
   const [userName, setUserName] = useState('');
@@ -73,12 +73,20 @@ function App() {
 
   const handleEditTask = async (taskId, updatedFields) => {
     const taskRef = doc(db, 'tasks', taskId);
+  
     try {
       await updateDoc(taskRef, updatedFields);
-      setTasks(tasks.map(task => task.id === taskId ? { ...task, ...updatedFields } : task));
+  
+      setTasks(tasks.map(task => {
+        return task.id === taskId ? { ...task, ...updatedFields } : task;
+      }));
     } catch (error) {
       console.error('Error updating task:', error);
     }
+  };
+
+  const handleToggleComplete = async (taskId, isCompleted) => {
+    await handleEditTask(taskId, { completed: isCompleted });
   };
 
   const handleDeleteTask = async (taskId) => {
@@ -103,6 +111,7 @@ function App() {
               categories={categories}
               onEditTask={handleEditTask}
               onDeleteTask={handleDeleteTask}
+              onToggleComplete={handleToggleComplete}
             />
           </>
         ) : (

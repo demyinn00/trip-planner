@@ -72,9 +72,56 @@
   border-bottom: 1px solid #ddd;
   color: #282c34; /* Dark color for text to be visible on light background */
   background-color: #ffffff; /* Optional: if you want to set a specific background color for tasks */
+
+  display: flex;
+  align-items: center; /* Aligns items vertically in the center */
+  gap: 10px; /* Adds space between the checkbox and the task description */
 }
 
 .task-card:last-child {
   border-bottom: none;
+}
+
+.task-card-content {
+  display: flex;
+  align-items: center;
+  flex-grow: 1; /* Allows the content to take up the remaining space */
+}
+
+/* Style for the checkbox specifically */
+.task-card-checkbox {
+  cursor: pointer;
+}
+
+/* Optional: Style for completed tasks */
+.task-card.completed .task-card-description {
+  text-decoration: line-through;
+  color: #a9a9a9;
+}
+
+/* Style for the task description */
+.task-card-description {
+  flex-grow: 1; /* Ensures the description takes up the available space */
+}
+
+/* Style for the edit and delete buttons */
+.task-card button {
+  margin-left: 5px;
+}
+
+/* Style for the form when editing a task */
+.task-card form {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  width: 100%;
+}
+
+.task-card form input[type="text"] {
+  flex-grow: 1;
+}
+
+.task-card form button {
+  padding: 5px 10px;
 }
 
