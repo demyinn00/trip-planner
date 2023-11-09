@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TaskCard from './TaskCard';
 
-const CategoryColumn = ({ category, tasks }) => {
+const CategoryColumn = ({ category, tasks, onEdit, onDelete }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
         <div className="category-column">
-        <h2>{category}</h2>
-        {tasks.map(task => (
-            <TaskCard key={task.id} task={task} />
+        <button className="category-header" onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? '▼' : '►'} {category} ({tasks.length})
+        </button>
+        {isOpen && tasks.map(task => (
+            <TaskCard key={task.id} task={task} onEdit={onEdit} onDelete={onDelete} />
         ))}
         </div>
     );

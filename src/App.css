@@ -36,3 +36,45 @@
     transform: rotate(360deg);
   }
 }
+
+.category-column {
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.category-header {
+  padding: 10px 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  background-color: #e7e7e7;
+  border: none;
+  border-radius: 8px 8px 0 0;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.category-header:hover {
+  background-color: #dcdcdc;
+}
+
+.task-card-title {
+  color: #282c34; /* React blue for task titles */
+}
+
+.task-card {
+  padding: 10px 15px;
+  border-bottom: 1px solid #ddd;
+  color: #282c34; /* Dark color for text to be visible on light background */
+  background-color: #ffffff; /* Optional: if you want to set a specific background color for tasks */
+}
+
+.task-card:last-child {
+  border-bottom: none;
+}
+

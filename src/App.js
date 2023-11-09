@@ -3,7 +3,17 @@ import './App.css';
 import TaskBoard from './components/TaskBoard';
 import AddTaskForm from './components/AddTaskForm';
 import { db } from './firebase';
-import { doc, getDoc, setDoc, collection, addDoc, query, where, onSnapshot } from 'firebase/firestore';
+import {
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  query,
+  onSnapshot
+} from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 
 const categories = ['Car Snacks', 'Water', 'Food', 'Entertainment', 'Electronics', 'Survival', 'Other Shit'];
@@ -32,8 +42,8 @@ function App() {
         }
       });
 
-      const q = query(collection(db, 'tasks'), where("assignedTo", "==", userName));
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const tasksQuery = query(collection(db, 'tasks'));
+      const unsubscribe = onSnapshot(tasksQuery, (querySnapshot) => {
         const fetchedTasks = querySnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
@@ -43,7 +53,7 @@ function App() {
 
       return () => unsubscribe();
     }
-  }, [userId, userName]);
+  }, [userId]);
 
   const handleAddTask = async (taskDescription, taskCategory) => {
     const newTask = {
@@ -53,14 +63,33 @@ function App() {
       assignedTo: userName,
       createdAt: new Date()
     };
-  
+
     try {
-      const docRef = await addDoc(collection(db, 'tasks'), newTask);
-      console.log('Task added with ID:', docRef.id);
+      await addDoc(collection(db, 'tasks'), newTask);
     } catch (error) {
       console.error('Error adding task to Firestore:', error);
     }
-  }  
+  };
+
+  const handleEditTask = async (taskId, updatedFields) => {
+    const taskRef = doc(db, 'tasks', taskId);
+    try {
+      await updateDoc(taskRef, updatedFields);
+      setTasks(tasks.map(task => task.id === taskId ? { ...task, ...updatedFields } : task));
+    } catch (error) {
+      console.error('Error updating task:', error);
+    }
+  };
+
+  const handleDeleteTask = async (taskId) => {
+    const taskRef = doc(db, 'tasks', taskId);
+    try {
+      await deleteDoc(taskRef);
+      setTasks(tasks.filter(task => task.id !== taskId));
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
+  };
 
   return (
     <div className="App">
@@ -69,7 +98,12 @@ function App() {
           <>
             <h1>Welcome to the Yosemite Trip Planner, {userName}!</h1>
             <AddTaskForm onAddTask={handleAddTask} categories={categories} />
-            <TaskBoard tasks={tasks} categories={categories} />
+            <TaskBoard
+              tasks={tasks}
+              categories={categories}
+              onEditTask={handleEditTask}
+              onDeleteTask={handleDeleteTask}
+            />
           </>
         ) : (
           <p>Loading...</p>
