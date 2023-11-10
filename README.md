@@ -15,7 +15,7 @@ The Yosemite Trip Planner is a web application designed to help my friends and I
 ## Technologies Used
 
 - React.js for the frontend
-- Firebase for the backend (Firestore for database, Firebase Authentication, Firebase Hosting)
+- Firebase for the backend (Firestore for database, Firebase Hosting)
 - UUID for generating unique identifiers
 
 ## Setup and Installation
