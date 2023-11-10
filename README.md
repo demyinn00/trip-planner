@@ -24,7 +24,7 @@ To set up the project on your local machine:
 
 1. Clone the repository:
     ```
-    git clone [repository URL]
+    git clone https://github.com/demyinn00/trip-planner.git
     ```
 2. Install the dependencies:
     ```
@@ -53,7 +53,7 @@ To use Firebase in your local environment, you need to configure your Firebase p
     REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
     REACT_APP_FIREBASE_APP_ID=your_app_id
     ```
-
+5. Restart your development server to load the new environment variables.
 ## Deployment
 
 The app is deployed using Firebase Hosting. To deploy a new version of the app:
